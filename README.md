@@ -10,19 +10,19 @@ You will need to build liboqs itself. Basically follow the steps in <https://git
 
 1. Clone this repository
 1. Define liboqs root directory in `compile.sh` (LIBOQS_ROOT_DIR)
-1. Change `CP_PATH` commands in `compile.sh` so that `oqspython.py` and `_oqspython.so` are copied into your Python project
+1. Change `RESULT_DIR` commands accordingly in `compile.sh` so that `oqspython.py` and `_oqspython.so` are copied into your Python project
 1. Run `compile.sh`
-1. Ensure that `oqspython.py`, `_oqspython.so`, and `__init__.py` are in the same directory
-1. Import `oqspython` in your Python code (based on where it is located relative to the Python file)
+1. Ensure that `oqspython.py`, `_oqspython.so`, and `__init__.py` are in the same directory (e.g., `oqs`) in your Python project
+1. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
 
 ## Exposed classes and functions
 
-Should be visible in IDE when `oqspython` is imported. Otherwise, see `oqspython.i`.
+Should be visible in IDE when `oqspython` is imported. Otherwise, see `oqspython.i` or `oqspython.py`.
 
 ## Example
 
 ```python
-from oqspython import oqspython
+from oqs import oqspython
 
 sig = oqspython.OQS_SIGNATURE(oqspython.OQS_SIG_alg_dilithium_5)
 
