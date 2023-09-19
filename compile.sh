@@ -4,7 +4,8 @@ mkdir -p build
 
 # Set the path to the liboqs root directory
 LIBOQS_ROOT_DIR="/Users/petr/Developer/Libraries/liboqs"
-RESULT_DIR="/Users/petr/Developer/Repos/some-project/oqs"
+MODULE_NAME="oqs"
+RESULT_DIR="/Users/petr/Developer/Repos/some-python-project/$MODULE_NAME"
 
 # Compile the C++ wrapper
 swig -python -c++ -o ./build/oqspython_wrap.cxx -I$LIBOQS_ROOT_DIR/build/include oqspython.i
@@ -18,7 +19,7 @@ g++ -std=c++20 -shared ./build/oqspython_wrap.o -L$LIBOQS_ROOT_DIR/build/lib -lo
 # Manual working version: g++ -std=c++20 -shared ./build/oqspython_wrap.o -L$LIBOQS_ROOT_DIR/build/lib -loqs -L/Users/petr/.pyenv/versions/3.11.5/lib -lpython3.11 -L/opt/homebrew/lib -lintl -L/opt/homebrew/opt/openssl@1.1/lib -lssl -lcrypto -o ./build/_oqspython.so
 
 # Copy the Python wrapper and the compiled C++ wrapper to the desired location
-rm -r $RESULT_DIR
+rm -rf $RESULT_DIR
 mkdir $RESULT_DIR
 cp ./build/oqspython.py $RESULT_DIR/oqspython.py
 cp ./build/_oqspython.so $RESULT_DIR/_oqspython.so
