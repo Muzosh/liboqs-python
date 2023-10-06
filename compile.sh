@@ -2,10 +2,16 @@
 rm -rf build
 mkdir -p build
 
+git clone -b main https://github.com/open-quantum-safe/liboqs.git \
+    && cd liboqs \
+    && mkdir build \
+    && cd build \
+    && cmake -GNinja .. \
+    && ninja
+
 # Set the path to the liboqs root directory
-LIBOQS_ROOT_DIR="/Users/petr/Developer/Libraries/liboqs"
-MODULE_NAME="oqs"
-RESULT_DIR="/Users/petr/Developer/Repos/some-python-project/$MODULE_NAME"
+LIBOQS_ROOT_DIR="./liboqs"
+RESULT_DIR="./output"
 
 # Compile the C++ wrapper
 swig -python -c++ -o ./build/oqspython_wrap.cxx -I$LIBOQS_ROOT_DIR/build/include oqspython.i

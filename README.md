@@ -2,18 +2,13 @@
 
 This repository documents the process of building the PHP extension of liboqs library.
 
-## Prerequisites
-
-You will need to build liboqs itself. Basically follow the steps in <https://github.com/open-quantum-safe/liboqs#quickstart> (no need to build with some modified -D arguments). Preliminary is to have `liboqs.a` in `build/lib` and header files in `build/include`.
-
 ## Installation
 
 1. Clone this repository
-1. Define liboqs root directory in `compile.sh` (LIBOQS_ROOT_DIR)
-1. Change `RESULT_DIR` commands accordingly in `compile.sh` so that `oqspython.py` and `_oqspython.so` are copied into your Python project
-1. Run `compile.sh`
-1. Ensure that `oqspython.py`, `_oqspython.so`, and `__init__.py` are in the same directory (e.g., `oqs`) in your Python project
-1. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
+2. Run `compile.sh`
+3. Ensure that `oqspython.py`, `_oqspython.so`, and `__init__.py` are in the `output` directory in your Python project
+4. Copy contents of `output` directory to your Python project in some new directory (e.g. `oqs`)
+5. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
 
 ## Exposed classes and functions
 
