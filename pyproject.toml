@@ -19,6 +19,9 @@ dependencies = []
 artifacts = [
   "*.so",
 ]
+include = [
+  "src/oqspython",
+]
 
 [tool.hatch.version]
 path = "version.py"
