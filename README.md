@@ -8,8 +8,9 @@ Pip, Python Hatch, cmake, ninja, and a C compiler (e.g. gcc) are required to bui
 ## Installation
 
 1. Clone this repository
-2. Run `pip-install.sh` to build dependencies and install `oqspython` package into your pip environment
-3. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
+2. Run `build.sh` to build dependencies and python package
+3. Run `pip install --upgrade --force-reinstall dist/oqspython-*.whl` to install the package into your pip environment
+4. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
 
 ## Exposed classes and functions
 

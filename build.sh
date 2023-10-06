@@ -33,4 +33,4 @@ cp ./build/_oqspython.so $RESULT_DIR/_oqspython.so
 touch $RESULT_DIR/__init__.py
 
 hatch build
-pip install --upgrade --force-reinstall dist/oqspython-*.whl
+# pip install --upgrade --force-reinstall dist/oqspython-*.whl
