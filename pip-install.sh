@@ -2,16 +2,17 @@
 rm -rf build
 mkdir -p build
 
-git clone -b main https://github.com/open-quantum-safe/liboqs.git \
-    && cd liboqs \
-    && mkdir build \
-    && cd build \
-    && cmake -GNinja .. \
-    && ninja
+if [ -e "liboqs" ]; then
+    echo "liboqs directory already exists, skipping cloning"; \
+else \
+    git clone -b main https://github.com/open-quantum-safe/liboqs.git; \
+fi
+
+cmake -GNinja -B liboqs/build liboqs && ninja -j $(nproc) -C liboqs/build
 
 # Set the path to the liboqs root directory
-LIBOQS_ROOT_DIR="./liboqs"
-RESULT_DIR="./output"
+LIBOQS_ROOT_DIR="liboqs"
+RESULT_DIR="src/oqspython"
 
 # Compile the C++ wrapper
 swig -python -c++ -o ./build/oqspython_wrap.cxx -I$LIBOQS_ROOT_DIR/build/include oqspython.i
@@ -26,7 +27,10 @@ g++ -std=c++20 -shared ./build/oqspython_wrap.o -L$LIBOQS_ROOT_DIR/build/lib -lo
 
 # Copy the Python wrapper and the compiled C++ wrapper to the desired location
 rm -rf $RESULT_DIR
-mkdir $RESULT_DIR
+mkdir -p $RESULT_DIR
 cp ./build/oqspython.py $RESULT_DIR/oqspython.py
 cp ./build/_oqspython.so $RESULT_DIR/_oqspython.so
 touch $RESULT_DIR/__init__.py
+
+hatch build
+pip install --upgrade --force-reinstall dist/oqspython-*.whl

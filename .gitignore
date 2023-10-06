@@ -57,3 +57,7 @@ composer.lock
 
 build
 .DS_Store
+dist
+.python-version
+liboqs
+src/oqspython

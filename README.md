@@ -2,13 +2,14 @@
 
 This repository documents the process of building the PHP extension of liboqs library.
 
+## Prerequisites
+Pip, Python Hatch, cmake, ninja, and a C compiler (e.g. gcc) are required to build the extension.
+
 ## Installation
 
 1. Clone this repository
-2. Run `compile.sh`
-3. Ensure that `oqspython.py`, `_oqspython.so`, and `__init__.py` are in the `output` directory in your Python project
-4. Copy contents of `output` directory to your Python project in some new directory (e.g. `oqs`)
-5. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
+2. Run `pip-install.sh` to build dependencies and install `oqspython` package into your pip environment
+3. `from oqs import oqspython` in your Python code (based on where it is located relative to the Python file)
 
 ## Exposed classes and functions
 
