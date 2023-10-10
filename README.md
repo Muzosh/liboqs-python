@@ -1,6 +1,6 @@
 # liboqs-python
 
-This repository documents the process of building the PHP extension of liboqs library.
+This repository documents the process of building the Python extension of liboqs library.
 
 ## Prerequisites
 Pip, Python Hatch, cmake, ninja, and a C compiler (e.g. gcc) are required to build the extension.
