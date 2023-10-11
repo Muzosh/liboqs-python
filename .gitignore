@@ -60,3 +60,4 @@ build
 dist
 .python-version
 src/oqspython
+liboqs
