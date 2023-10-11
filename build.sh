@@ -2,14 +2,22 @@
 rm -rf build
 mkdir -p build
 
-if [ -v LIBOQS_ROOT ] && [ -e $LIBOQS_ROOT ]; then
+
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+if [[ -e "$LIBOQS_ROOT" ]] || [[ -e "$script_dir/liboqs" ]]; then
     echo "liboqs directory already exists, skipping cloning"; \
 else \
     git clone -b main https://github.com/open-quantum-safe/liboqs.git; \
     export LIBOQS_ROOT=$(pwd)/liboqs; \
 fi
 
-cmake -GNinja -B $LIBOQS_ROOT/build liboqs && ninja -j $(nproc) -C $LIBOQS_ROOT/build
+if [[ -e "$LIBOQS_ROOT/build" ]]; then
+    echo "liboqs library already builded, skipping compilation"; \
+else \
+    rm -rf $LIBOQS_ROOT/build; \
+    cmake -GNinja -B $LIBOQS_ROOT/build $LIBOQS_ROOT && ninja -j $(nproc) -C $LIBOQS_ROOT/build; \
+fi
 
 # Set the path to the liboqs root directory
 RESULT_DIR="src/oqspython"
@@ -34,3 +42,4 @@ touch $RESULT_DIR/__init__.py
 
 hatch build
 # pip install --upgrade --force-reinstall dist/oqspython-*.whl
+echo "Finished"
